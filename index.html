@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#12a8c1" />
+  <meta name="description" content="Gerador de cotações de planos de saúde da Resolve Saúde" />
+  <title>Resolve Saúde | Gerador de Cotações</title>
+  <link rel="icon" href="assets/logo-resolve.png" type="image/png" />
+  <link rel="stylesheet" href="styles.css" />
+  <script src="dados.js" defer></script>
+  <script src="tabelas_precos.js" defer></script>
+  <script src="app.js" defer></script>
+  <script src="familiar.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="topbar container">
+      <div class="brand">
+        <img class="brand-logo" src="assets/logo-resolve.png" alt="Resolve Saúde" />
+        <span class="brand-divider" aria-hidden="true"></span>
+        <div class="brand-label"><strong>Gerador de Cotações</strong><span>Propostas personalizadas</span></div>
+      </div>
+      <span class="version-tag">VERSÃO 1.0</span>
+    </div>
+  </header>
+
+  <main class="container main-container">
+    <section class="page-intro">
+      <div><span class="eyebrow">RESOLVE SAÚDE · COTAÇÕES</span><h1>Monte uma cotação em poucos passos.</h1><p>Escolha entre cotação individual ou familiar e gere a imagem pronta para enviar ao cliente.</p></div>
+    </section>
+
+    <div class="tabs" role="tablist" aria-label="Tipo de cotação">
+      <button class="tab selected" id="tab-individual" role="tab" aria-selected="true" type="button"><span class="tab-icon">◉</span> Cotação individual</button>
+      <button class="tab" id="tab-familiar" role="tab" aria-selected="false" type="button"><span class="tab-icon">♧</span> Cotação familiar</button>
+    </div>
+
+    <div class="workspace" id="workspaceIndividual">
+      <section class="panel editor-panel" aria-labelledby="editor-title">
+        <div class="panel-heading"><div><div class="section-kicker">ETAPA 01</div><h2 id="editor-title">Dados da cotação</h2></div><div class="heading-symbol" aria-hidden="true">✎</div></div>
+        <form id="quoteForm" autocomplete="off" novalidate>
+          <div class="field-group">
+            <label for="contrato">Contrato <span class="required">*</span></label>
+            <select id="contrato" name="contrato" required></select>
+            <div class="field-tip"><span aria-hidden="true">ⓘ</span> Uso interno: contrato e código nunca aparecem na imagem final.</div>
+          </div>
+
+          <div class="field-group">
+            <label for="plano">Plano <span class="required">*</span></label>
+            <select id="plano" name="plano" required></select>
+          </div>
+
+          <div class="field-group">
+            <label for="nomeBeneficiario">BENEFICIÁRIO <span class="field-optional">(opcional)</span></label>
+            <input type="text" id="nomeBeneficiario" name="nomeBeneficiario" maxlength="80" placeholder="Ex.: JOÃO GONÇALVES DE ARAÚJO" autocomplete="off" autocapitalize="characters" spellcheck="false" />
+            <p class="field-tip">O nome será exibido em letras maiúsculas na imagem, com acentos e Ç preservados.</p>
+          </div>
+
+          <div class="field-group">
+            <label>Como informar a idade? <span class="required">*</span></label>
+            <div class="segmented" role="radiogroup" aria-label="Como informar a idade">
+              <label class="seg-option"><input type="radio" name="modoIdade" value="nascimento" checked /> <span>Data de nascimento</span></label>
+              <label class="seg-option"><input type="radio" name="modoIdade" value="idade" /> <span>Idade</span></label>
+            </div>
+            <div id="nascimentoField" class="age-field"><label class="secondary-label" for="nascimento">Data de nascimento</label><input type="date" id="nascimento" name="nascimento" /></div>
+            <div id="idadeField" class="age-field hidden"><label class="secondary-label" for="idade">Idade em anos</label><input type="number" id="idade" name="idade" min="0" max="120" step="1" inputmode="numeric" placeholder="Ex.: 46" /></div>
+            <div class="age-result" id="ageResult">Informe uma data de nascimento ou idade para identificar a faixa etária.</div>
+          </div>
+
+          <div class="auto-panel" aria-live="polite">
+            <div class="auto-heading"><span class="auto-dot" aria-hidden="true"></span> Informações automáticas do plano</div>
+            <div class="info-row"><span>Prestadora</span><strong id="infoPrestadora">—</strong></div>
+            <div class="info-row"><span>Acomodação</span><strong id="infoAcomodacao">—</strong></div>
+            <div class="info-row"><span>Abrangência</span><strong id="infoAbrangencia">—</strong></div>
+            <div class="info-row"><span>Coparticipação</span><strong id="infoCoparticipacao">—</strong></div>
+            <div class="info-row info-price"><span>Mensalidade</span><strong id="infoMensalidade">A definir</strong></div>
+          </div>
+
+          <div class="form-divider"></div>
+          <div class="subsection-heading"><div><span class="section-kicker">ETAPA 02</span><h3>Vendedor responsável</h3></div></div>
+          <div class="field-group"><label for="vendedor">Vendedor <span class="required">*</span></label><select id="vendedor" name="vendedor" required></select><p class="field-tip">Nome, WhatsApp e e-mail são carregados automaticamente. WhatsApp é opcional para vendedores sem número cadastrado.</p></div>
+          <div id="vendedorFields" class="seller-panel">
+            <div class="seller-contact" id="sellerWhatsRow"><span class="contact-caption">WHATSAPP</span><strong id="sellerWhats">—</strong></div>
+            <div class="seller-contact"><span class="contact-caption">E-MAIL</span><strong id="sellerEmail">—</strong></div>
+          </div>
+          <p id="validationMessage" class="validation-message" role="status" aria-live="polite"></p>
+          <div class="form-actions">
+            <button type="button" class="btn btn-primary" id="downloadButton"><span aria-hidden="true">↓</span> Baixar PNG</button>
+            <button type="button" class="btn btn-whatsapp" id="shareButton"><span aria-hidden="true">◌</span> Compartilhar no WhatsApp</button>
+          </div>
+          <p class="disclaimer">O contrato é usado somente na consulta de preços e não é exibido na imagem. Valores extraídos da coluna COBRANÇA REAJUSTADA das tabelas de venda. Quando falta valor, a cotação fica bloqueada.</p>
+        </form>
+      </section>
+
+      <aside class="panel preview-panel" aria-label="Pré-visualização da imagem">
+        <div class="preview-head"><div><span class="section-kicker">VISUALIZAÇÃO EM TEMPO REAL</span><h2>Prévia da imagem</h2></div><span class="png-pill">PNG</span></div>
+        <div class="preview-stage"><canvas id="cotacaoCanvas" width="1200" height="1500" role="img" aria-label="Prévia visual da cotação individual"></canvas></div>
+        <div class="preview-caption"><span aria-hidden="true">✦</span> A imagem final tem 1200 × 1500 pixels, adequada para compartilhar no WhatsApp.</div>
+        <div class="demo-notice"><strong>Valores de venda integrados.</strong> Os preços vêm do arquivo local <code>tabelas_precos.js</code>. Alguns planos estão sem valores nas tabelas de origem; nesses casos, o sistema bloqueia a emissão até o preço ser cadastrado. Compartilhar abre o WhatsApp; anexe a imagem caso o navegador não permita copiá-la diretamente.</div>
+      </aside>
+    </div>
+    <div class="workspace hidden" id="workspaceFamiliar">
+      <section class="panel editor-panel" aria-labelledby="familiarTitle">
+        <div class="panel-heading"><div><div class="section-kicker">ETAPA 01 · COTAÇÃO FAMILIAR</div><h2 id="familiarTitle">Dados da família</h2></div><div class="heading-symbol" aria-hidden="true">♧</div></div>
+        <form id="familyForm" autocomplete="off" novalidate>
+          <div class="field-group">
+            <label for="familyContrato">Contrato <span class="required">*</span></label>
+            <select id="familyContrato" required></select>
+            <p class="field-tip"><span aria-hidden="true">ⓘ</span> Uso interno: o contrato nunca aparece na imagem que o cliente recebe.</p>
+          </div>
+          <div class="field-group"><label for="familyPlano">Plano <span class="required">*</span></label><select id="familyPlano" required></select></div>
+          <div class="family-title-row"><div><span class="section-kicker">ETAPA 02</span><h3>Beneficiários</h3><p class="field-tip">Informe a idade ou data de nascimento de cada pessoa. O valor individual será automático.</p></div><span class="family-count" id="familyCount">2 pessoas</span></div>
+          <div id="familyPeople" class="family-people" aria-live="polite"></div>
+          <button id="familyAdd" type="button" class="btn btn-outline family-add"><span aria-hidden="true">＋</span> Adicionar beneficiário</button>
+          <div class="auto-panel family-auto" aria-live="polite">
+            <div class="auto-heading"><span class="auto-dot" aria-hidden="true"></span> Informações automáticas do plano</div>
+            <div class="info-row"><span>Prestadora</span><strong id="familyPrestadora">—</strong></div>
+            <div class="info-row"><span>Acomodação</span><strong id="familyAcomodacao">—</strong></div>
+            <div class="info-row"><span>Abrangência</span><strong id="familyAbrangencia">—</strong></div>
+            <div class="info-row"><span>Coparticipação</span><strong id="familyCoparticipacao">—</strong></div>
+            <div class="info-row info-price"><span>Valor total mensal</span><strong id="familyTotal">A definir</strong></div>
+          </div>
+          <div class="form-divider"></div>
+          <div class="subsection-heading"><div><span class="section-kicker">ETAPA 03</span><h3>Vendedor responsável</h3></div></div>
+          <div class="field-group"><label for="familyVendedor">Vendedor <span class="required">*</span></label><select id="familyVendedor" required></select><p class="field-tip">Nome, WhatsApp e e-mail carregados automaticamente.</p></div>
+          <div id="familySellerPanel" class="seller-panel hidden">
+            <div class="seller-contact" id="familyWhatsRow"><span class="contact-caption">WHATSAPP</span><strong id="familyWhats">—</strong></div>
+            <div class="seller-contact"><span class="contact-caption">E-MAIL</span><strong id="familyEmail">—</strong></div>
+          </div>
+          <p id="familyValidation" class="validation-message" role="status" aria-live="polite"></p>
+          <div class="form-actions">
+            <button type="button" class="btn btn-primary" id="familyDownload"><span aria-hidden="true">↓</span> Baixar PNG</button>
+            <button type="button" class="btn btn-whatsapp" id="familyShare"><span aria-hidden="true">◌</span> Compartilhar no WhatsApp</button>
+          </div>
+          <p class="disclaimer">Preço por beneficiário: contrato + plano + faixa etária, usando somente a coluna COBRANÇA REAJUSTADA. O contrato não é exibido na imagem final. Nenhuma mensalidade é presumida.</p>
+        </form>
+      </section>
+      <aside class="panel preview-panel" aria-label="Pré-visualização da cotação familiar">
+        <div class="preview-head"><div><span class="section-kicker">VISUALIZAÇÃO EM TEMPO REAL</span><h2>Prévia da cotação familiar</h2></div><span class="png-pill">PNG</span></div>
+        <div class="preview-stage"><canvas id="familyCanvas" width="1200" height="1500" role="img" aria-label="Prévia da cotação com beneficiários e mensalidade total"></canvas></div>
+        <div class="preview-caption"><span aria-hidden="true">✦</span> Imagem PNG com resolução de 1200 px de largura. A altura se ajusta conforme a quantidade de beneficiários.</div>
+        <div class="demo-notice"><strong>Valores de venda integrados.</strong> Cada pessoa utiliza a sua faixa etária. Caso algum preço não exista na tabela do contrato, o download e o compartilhamento ficam bloqueados. Para enviar no WhatsApp Web, cole ou anexe a imagem.</div>
+      </aside>
+    </div>
+    <footer class="site-footer">Resolve Saúde · Cotações Individual e Familiar · Versão 2.0</footer>
+  </main>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>

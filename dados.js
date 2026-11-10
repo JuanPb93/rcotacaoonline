@@ -412,78 +412,12 @@ window.RESOLVE_DADOS = {
       "nome": "AFSEBRAE",
       "planos": [
         {
-          "id": "unipe",
-          "codigo": "492537228",
-          "nome": "UNIPÊ CO ADESÃO",
-          "prestadora": "UNIMED",
-          "acomodacao": "Enfermaria (ENF)",
-          "abrangencia": "Grupo de Municípios",
-          "coparticipacao": false,
-          "demonstrativo": false,
-          "restricaoMovimentacaoOrigem": false
-        },
-        {
-          "id": "unipe-mais",
-          "codigo": "492538226",
-          "nome": "UNIPÊ CO MAIS ADESÃO",
-          "prestadora": "UNIMED",
-          "acomodacao": "Apartamento (APT)",
-          "abrangencia": "Grupo de Municípios",
-          "coparticipacao": false,
-          "demonstrativo": false,
-          "restricaoMovimentacaoOrigem": false
-        },
-        {
-          "id": "um-basico",
-          "codigo": "473305153",
-          "nome": "UNIMULTI EMPRESARIAL BÁSICO",
-          "prestadora": "UNIMED",
-          "acomodacao": "Enfermaria (ENF)",
-          "abrangencia": "Estadual",
-          "coparticipacao": false,
-          "demonstrativo": false,
-          "restricaoMovimentacaoOrigem": false
-        },
-        {
           "id": "um-especial",
           "codigo": "473301151",
           "nome": "UNIMULTI EMPRESARIAL ESPECIAL",
           "prestadora": "UNIMED",
           "acomodacao": "Apartamento (APT)",
           "abrangencia": "Estadual",
-          "coparticipacao": false,
-          "demonstrativo": false,
-          "restricaoMovimentacaoOrigem": false
-        },
-        {
-          "id": "um-basico-copart",
-          "codigo": "473308158",
-          "nome": "UNIMULTI EMPRESARIAL BÁSICO COPART",
-          "prestadora": "UNIMED",
-          "acomodacao": "Enfermaria (ENF)",
-          "abrangencia": "Estadual",
-          "coparticipacao": true,
-          "demonstrativo": false,
-          "restricaoMovimentacaoOrigem": false
-        },
-        {
-          "id": "um-especial-copart",
-          "codigo": "473302159",
-          "nome": "UNIMULTI EMPRESARIAL ESPECIAL COPART",
-          "prestadora": "UNIMED",
-          "acomodacao": "Apartamento (APT)",
-          "abrangencia": "Estadual",
-          "coparticipacao": true,
-          "demonstrativo": false,
-          "restricaoMovimentacaoOrigem": false
-        },
-        {
-          "id": "uv-basico",
-          "codigo": "473307150",
-          "nome": "UNIVIDA BÁSICO",
-          "prestadora": "UNIMED",
-          "acomodacao": "Enfermaria (ENF)",
-          "abrangencia": "Nacional",
           "coparticipacao": false,
           "demonstrativo": false,
           "restricaoMovimentacaoOrigem": false
@@ -496,28 +430,6 @@ window.RESOLVE_DADOS = {
           "acomodacao": "Apartamento (APT)",
           "abrangencia": "Nacional",
           "coparticipacao": false,
-          "demonstrativo": false,
-          "restricaoMovimentacaoOrigem": false
-        },
-        {
-          "id": "uv-basico-copart",
-          "codigo": "473306151",
-          "nome": "UNIVIDA BÁSICO COPART",
-          "prestadora": "UNIMED",
-          "acomodacao": "Enfermaria (ENF)",
-          "abrangencia": "Nacional",
-          "coparticipacao": true,
-          "demonstrativo": false,
-          "restricaoMovimentacaoOrigem": false
-        },
-        {
-          "id": "uv-especial-copart",
-          "codigo": "473304155",
-          "nome": "UNIVIDA ESPECIAL COPART",
-          "prestadora": "UNIMED",
-          "acomodacao": "Apartamento (APT)",
-          "abrangencia": "Nacional",
-          "coparticipacao": true,
           "demonstrativo": false,
           "restricaoMovimentacaoOrigem": false
         }
@@ -1088,17 +1000,6 @@ window.RESOLVE_DADOS = {
           "restricaoMovimentacaoOrigem": false
         },
         {
-          "id": "uv-basico-copart",
-          "codigo": "473306151",
-          "nome": "UNIVIDA BÁSICO COPART",
-          "prestadora": "UNIMED",
-          "acomodacao": "Enfermaria (ENF)",
-          "abrangencia": "Nacional",
-          "coparticipacao": true,
-          "demonstrativo": false,
-          "restricaoMovimentacaoOrigem": false
-        },
-        {
           "id": "uv-especial-copart",
           "codigo": "473304155",
           "nome": "UNIVIDA ESPECIAL COPART",
@@ -1115,17 +1016,6 @@ window.RESOLVE_DADOS = {
       "id": "5841",
       "nome": "SINPRO",
       "planos": [
-        {
-          "id": "um-basico",
-          "codigo": "473305153",
-          "nome": "UNIMULTI EMPRESARIAL BÁSICO",
-          "prestadora": "UNIMED",
-          "acomodacao": "Enfermaria (ENF)",
-          "abrangencia": "Estadual",
-          "coparticipacao": false,
-          "demonstrativo": false,
-          "restricaoMovimentacaoOrigem": true
-        },
         {
           "id": "um-especial",
           "codigo": "473301151",
@@ -1154,17 +1044,6 @@ window.RESOLVE_DADOS = {
       "id": "4903-A",
       "nome": "SINSEP ATIVO",
       "planos": [
-        {
-          "id": "um-basico",
-          "codigo": "473305153",
-          "nome": "UNIMULTI EMPRESARIAL BÁSICO",
-          "prestadora": "UNIMED",
-          "acomodacao": "Enfermaria (ENF)",
-          "abrangencia": "Estadual",
-          "coparticipacao": false,
-          "demonstrativo": false,
-          "restricaoMovimentacaoOrigem": false
-        },
         {
           "id": "um-especial",
           "codigo": "473301151",

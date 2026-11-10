@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="styles.css" />
   <script src="dados.js" defer></script>
   <script src="tabelas_precos.js" defer></script>
+  <script src="compartilhamento.js" defer></script>
   <script src="app.js" defer></script>
   <script src="familiar.js" defer></script>
 </head>
@@ -21,7 +22,7 @@
         <span class="brand-divider" aria-hidden="true"></span>
         <div class="brand-label"><strong>Gerador de Cotações</strong><span>Propostas personalizadas</span></div>
       </div>
-      <span class="version-tag">VERSÃO 1.0</span>
+      <span class="version-tag">VERSÃO 1.1</span>
     </div>
   </header>
 
@@ -96,7 +97,7 @@
         <div class="preview-head"><div><span class="section-kicker">VISUALIZAÇÃO EM TEMPO REAL</span><h2>Prévia da imagem</h2></div><span class="png-pill">PNG</span></div>
         <div class="preview-stage"><canvas id="cotacaoCanvas" width="1200" height="1500" role="img" aria-label="Prévia visual da cotação individual"></canvas></div>
         <div class="preview-caption"><span aria-hidden="true">✦</span> A imagem final tem 1200 × 1500 pixels, adequada para compartilhar no WhatsApp.</div>
-        <div class="demo-notice"><strong>Valores de venda integrados.</strong> Os preços vêm do arquivo local <code>tabelas_precos.js</code>. Alguns planos estão sem valores nas tabelas de origem; nesses casos, o sistema bloqueia a emissão até o preço ser cadastrado. Compartilhar abre o WhatsApp; anexe a imagem caso o navegador não permita copiá-la diretamente.</div>
+        <div class="demo-notice"><strong>Valores de venda integrados.</strong> Os preços vêm do arquivo local <code>tabelas_precos.js</code>. Alguns planos estão sem valores nas tabelas de origem; nesses casos, o sistema bloqueia a emissão até o preço ser cadastrado. Compartilhar envia somente o PNG pelo menu nativo quando disponível; em outros navegadores, copie ou baixe a imagem e envie pelo WhatsApp Web.</div>
       </aside>
     </div>
     <div class="workspace hidden" id="workspaceFamiliar">
@@ -139,7 +140,7 @@
         <div class="preview-head"><div><span class="section-kicker">VISUALIZAÇÃO EM TEMPO REAL</span><h2>Prévia da cotação familiar</h2></div><span class="png-pill">PNG</span></div>
         <div class="preview-stage"><canvas id="familyCanvas" width="1200" height="1500" role="img" aria-label="Prévia da cotação com beneficiários e mensalidade total"></canvas></div>
         <div class="preview-caption"><span aria-hidden="true">✦</span> Imagem PNG com resolução de 1200 px de largura. A altura se ajusta conforme a quantidade de beneficiários.</div>
-        <div class="demo-notice"><strong>Valores de venda integrados.</strong> Cada pessoa utiliza a sua faixa etária. Caso algum preço não exista na tabela do contrato, o download e o compartilhamento ficam bloqueados. Para enviar no WhatsApp Web, cole ou anexe a imagem.</div>
+        <div class="demo-notice"><strong>Valores de venda integrados.</strong> Cada pessoa utiliza a sua faixa etária. Caso algum preço não exista na tabela do contrato, o download e o compartilhamento ficam bloqueados. Para enviar no WhatsApp Web, use a opção de copiar ou baixar o PNG e cole ou anexe à conversa.</div>
       </aside>
     </div>
     <footer class="site-footer">Resolve Saúde · Cotações Individual e Familiar · Versão 2.0</footer>

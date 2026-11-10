@@ -269,18 +269,15 @@
     try{paint(q);save(await getBlob(),fileName(q));toast('Cotação familiar em PNG gerada com sucesso.');}
     catch(e){toast('Não foi possível gerar o PNG neste navegador.');}
   }
-  async function shareWhatsApp(){
-    const q=getQuote();if(validate(q))return;
-    // Abre somente WhatsApp, não o menu de compartilhamento com outros aplicativos.
-    const message=`Olá! Segue a cotação familiar do plano ${q.plan.nome}, com ${q.members.length} beneficiários e total mensal de ${fmt(q.total)}. Resolve Saúde.`;
-    const tab=window.open(`https://wa.me/?text=${encodeURIComponent(message)}`,'_blank','noopener,noreferrer');
-    try{
-      paint(q);const blob=await getBlob();let copied=false;
-      try{if(navigator.clipboard&&window.ClipboardItem&&window.isSecureContext){await navigator.clipboard.write([new ClipboardItem({'image/png':blob})]);copied=true;}}catch(e){/* navegador sem suporte */}
-      if(copied)toast('WhatsApp aberto. Cole a imagem na conversa para enviar.');
-      else{save(blob,fileName(q));toast('WhatsApp aberto. Anexe o PNG baixado na conversa.');}
-      if(!tab)toast('Caso o WhatsApp não abra, permita novas abas. A imagem foi preparada.');
-    }catch(e){toast('Não foi possível preparar a imagem para o WhatsApp.');}
+  function shareWhatsApp(){
+    const q=getQuote(); if(validate(q)) return;
+    try {
+      paint(q);
+      // Apenas imagem PNG, usando o mesmo mecanismo da cotação individual.
+      window.ResolveCompartilhamento.enviar(fields.canvas, fileName(q), toast);
+    } catch (_) {
+      toast('Não foi possível preparar o compartilhamento da imagem.');
+    }
   }
   fields.individualTab.addEventListener('click',()=>showTab(false));
   fields.familyTab.addEventListener('click',()=>showTab(true));

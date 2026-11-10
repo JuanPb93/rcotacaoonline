@@ -19,14 +19,15 @@ Este projeto tem **duas janelas de cotação**: **Individual** (preservada da v1
 - Se qualquer nome, idade, contato obrigatório ou mensalidade estiver faltando, **Baixar** e **Compartilhar** ficam indisponíveis.
 - A cotação final **não exibe o contrato**. O cabeçalho e o rodapé têm o mesmo estilo visual da cotação individual, inclusive data de emissão e contatos do vendedor. A área de características do plano substitui o antigo bloco `CLIENTE` do modelo familiar.
 - PNG com **1200 pixels de largura** e altura variável conforme a quantidade de pessoas; o site se adapta a celulares, tablets e computadores.
-- O compartilhamento abre exclusivamente o **WhatsApp/WhatsApp Web**. A imagem poderá ser copiada para colagem no WhatsApp quando o navegador permitir; caso contrário, o sistema fará o download para anexar manualmente. O envio da imagem não é automático.
+- **Compartilhar no WhatsApp** prepara **somente a imagem PNG, sem texto ou legenda**. No Safari/Chrome compatíveis com compartilhamento de arquivos, o sistema abre o menu nativo, onde o vendedor seleciona o WhatsApp. No computador, ou caso não haja suporte, o sistema tenta copiar o PNG e oferece a abertura do WhatsApp Web para colar a imagem (Ctrl+V / ⌘+V); se necessário, há opção de download do PNG para anexar. Por segurança dos navegadores, não é possível forçar a escolha do WhatsApp ou anexar/enviar automaticamente no WhatsApp Web.
 
 ## Arquivos
 
 - `index.html` — interface das duas janelas
 - `styles.css` — estilos responsivos, incluindo os novos componentes familiares
 - `app.js` — código da cotação individual, **sem alteração nas regras ou desenho**; apenas retirada a mensagem de "Em breve" da aba familiar
-- `familiar.js` — formulário, validações, desenho PNG e compartilhamento da cotação familiar
+- `familiar.js` — formulário, validações, desenho PNG e integração com o compartilhamento da familiar
+- `compartilhamento.js` — compartilha somente PNG via Web Share API ou oferece cópia/download para WhatsApp Web
 - `dados.js` — vendedores, contratos, vínculos dos planos e características dos planos
 - `tabelas_precos.js` — arquivo de preços isolado; atualize somente este arquivo em futuros reajustes
 - `assets` — imagens e logos usadas nas cotações

@@ -234,29 +234,15 @@
       const blob=await gerarBlob();baixarBlob(blob,nomeArquivo(q));mostrarToast('Imagem PNG gerada com sucesso.');
     }catch(e){mostrarToast('Não foi possível baixar a imagem neste navegador.');}
   }
-  async function compartilharWhatsApp() {
-    const q=obterCotacao();if(testeDados(q)) return;
-    const cliente=q.nomeBeneficiario?` para ${q.nomeBeneficiario}`:'';
-    const textoWhats=`Olá! Segue a cotação${cliente} do plano ${q.plano.nome}, faixa etária ${q.faixa.texto.toLowerCase()}, mensalidade ${money(q.preco)}. Resolve Saúde.`;
-    const urlWhats=`https://wa.me/?text=${encodeURIComponent(textoWhats)}`;
-    // Abre apenas WhatsApp / WhatsApp Web, sem apresentar apps de terceiros.
-    // Navegadores não oferecem API para anexar PNG diretamente ao WhatsApp Web.
-    const janela=window.open(urlWhats,'_blank','noopener,noreferrer');
+  function compartilharWhatsApp() {
+    const q=obterCotacao(); if(testeDados(q)) return;
     try {
       desenharCotacao(q);
-      const blob=await gerarBlob();
-      let copiado=false;
-      try {
-        if(navigator.clipboard && window.ClipboardItem && window.isSecureContext) {
-          await navigator.clipboard.write([new ClipboardItem({'image/png':blob})]);
-          copiado=true;
-        }
-      } catch(e) {copiado=false;}
-      if(copiado) mostrarToast('WhatsApp aberto. Cole a imagem na conversa e envie.');
-      else {baixarBlob(blob,nomeArquivo(q));mostrarToast('WhatsApp aberto. PNG baixado: anexe o arquivo na conversa para enviar.');}
-      // Alguns navegadores móveis bloqueiam novas abas; evita prometer envio direto.
-      if(!janela) mostrarToast('Se o WhatsApp não abriu, permita novas abas e tente novamente. A imagem foi preparada.');
-    } catch(e) {mostrarToast('Não foi possível preparar a imagem para o WhatsApp.');}
+      // Apenas PNG (sem mensagem ou URL de texto). Mantém o clique como gesto ativo.
+      window.ResolveCompartilhamento.enviar(el.canvas, nomeArquivo(q), mostrarToast);
+    } catch (_) {
+      mostrarToast('Não foi possível preparar o compartilhamento da imagem.');
+    }
   }
 
   // Eventos de formulário.

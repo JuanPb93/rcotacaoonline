@@ -1,4 +1,4 @@
-# Resolve Saúde — Gerador de Cotações v2.0
+# Resolve Saúde — Gerador de Cotações v1.3
 
 Este projeto tem **duas janelas de cotação**: **Individual** (preservada da v1.4.1) e **Familiar** (nova).
 
